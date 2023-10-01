@@ -1,0 +1,15 @@
+{:paths ["src" "resources"]
+ :deps {org.clojure/clojure {:mvn/version "1.11.1"}
+        com.walmartlabs/lacinia {:mvn/version "1.2.1"}}
+ :aliases
+ {:run-m {:main-opts ["-m" "sanuv.my-clojure-game-geek"]}
+  :run-x {:ns-default sanuv.my-clojure-game-geek
+          :exec-fn greet
+          :exec-args {:name "Clojure"}}
+  :build {:deps {io.github.clojure/tools.build {:mvn/version "0.9.4"}}
+          :ns-default build}
+  :dev {:extra-paths ["dev-resources"]}
+  :test {:extra-paths ["test"]
+         :extra-deps {org.clojure/test.check {:mvn/version "1.1.1"}
+                      io.github.cognitect-labs/test-runner
+                      {:git/tag "v0.5.1" :git/sha "dfb30dd"}}}}}

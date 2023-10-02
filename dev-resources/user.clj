@@ -35,7 +35,7 @@
 
 (defn start-server
   [_]
-  (let [server (-> (lp/default-service schema nil)
+  (let [server (-> (lp/default-service schema {:host "0.0.0.0"})
                    http/create-server
                    http/start)]
     (browse-url "http://localhost:8888/ide")

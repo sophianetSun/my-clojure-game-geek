@@ -1,6 +1,8 @@
 {:paths ["src" "resources"]
  :deps {org.clojure/clojure {:mvn/version "1.11.1"}
-        com.walmartlabs/lacinia {:mvn/version "1.2.1"}}
+        com.walmartlabs/lacinia {:mvn/version "1.2.1"}
+        com.walmartlabs/lacinia-pedestal {:mvn/version "1.2"}
+        io.aviso/logging {:mvn/version "1.0"}}
  :aliases
  {:run-m {:main-opts ["-m" "sanuv.my-clojure-game-geek"]}
   :run-x {:ns-default sanuv.my-clojure-game-geek

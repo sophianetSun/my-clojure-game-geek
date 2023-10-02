@@ -2,11 +2,11 @@
   (:require
    [sanuv.clojure-game-geek.schema :as s]
    [com.walmartlabs.lacinia :as lacinia]
+   [com.walmartlabs.lacinia.pedestal2 :as lp]
+   [io.pedestal.http :as http]
+   [clojure.java.browse :refer [browse-url]]
    [clojure.walk :as walk])
   (:import (clojure.lang IPersistentMap)))
-
-
-(def schema (s/load-schema))
 
 (def schema (s/load-schema))
 
@@ -30,3 +30,28 @@
   [query-string]
   (-> (lacinia/execute schema query-string nil nil)
       simplify))
+
+(defonce server nil)
+
+(defn start-server
+  [_]
+  (let [server (-> (lp/default-service schema nil)
+                   http/create-server
+                   http/start)]
+    (browse-url "http://localhost:8888/ide")
+    server))
+
+(defn stop-server
+  [server]
+  (http/stop server)
+  nil)
+
+(defn start
+  []
+  (alter-var-root #'server start-server)
+  :started)
+
+(defn stop
+  []
+  (alter-var-root #'server stop-server)
+  :stopped)
